@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>La Sera — Authentic Italian Cuisine</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--black:#080808;--dark:#111111;--card:#161616;--gold:#C6993F;--gold2:#E8C97A;--cream:#F2EBE0;--muted:#8A8070;--border:rgba(198,153,63,0.18);--ff-head:'Cormorant Garamond',Georgia,serif;--ff-body:'Jost',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:#080808;color:#F2EBE0;font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.5rem 4rem;display:flex;align-items:center;justify-content:space-between;transition:all .4s ease}
+nav.scrolled{background:rgba(8,8,8,.95);backdrop-filter:blur(12px);padding:1rem 4rem;border-bottom:1px solid rgba(198,153,63,0.18)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;letter-spacing:.12em;color:#C6993F;text-decoration:none}
+.nav-logo span{font-style:italic;color:#F2EBE0}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{color:#8A8070;text-decoration:none;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;transition:color .3s}
+.nav-links a:hover{color:#C6993F}
+.nav-reserve{background:transparent;border:1px solid #C6993F;color:#C6993F;padding:.5rem 1.4rem;font-family:'Jost',sans-serif;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.nav-reserve:hover{background:#C6993F;color:#080808}
+#hero{position:relative;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#080808}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 70% at 60% 40%,#1a1206 0%,#0d0a04 40%,#080808 100%)}
+.hero-lines{position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 79px,rgba(198,153,63,.04) 79px,rgba(198,153,63,.04) 80px),repeating-linear-gradient(90deg,transparent,transparent 79px,rgba(198,153,63,.04) 79px,rgba(198,153,63,.04) 80px)}
+.hero-glow{position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(198,153,63,.12) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:pulse 6s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.6;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}}
+.hero-content{position:relative;text-align:center;z-index:2}
+.hero-tag{font-size:.72rem;letter-spacing:.35em;text-transform:uppercase;color:#C6993F;margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s .2s forwards}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(4rem,10vw,8rem);font-weight:300;line-height:.95;letter-spacing:.04em;color:#F2EBE0;margin-bottom:.5rem;opacity:0;animation:fadeUp .8s .4s forwards}
+.hero-title em{font-style:italic;color:#C6993F;display:block}
+.hero-sub{font-size:.9rem;letter-spacing:.12em;color:#8A8070;margin:.5rem 0 2.5rem;text-transform:uppercase;opacity:0;animation:fadeUp .8s .6s forwards}
+.hero-divider{width:60px;height:1px;background:#C6993F;margin:0 auto 2.5rem;opacity:0;animation:fadeUp .8s .7s forwards}
+.hero-btns{display:flex;gap:1.2rem;justify-content:center;opacity:0;animation:fadeUp .8s .8s forwards}
+.btn-primary{background:#C6993F;color:#080808;padding:.85rem 2.2rem;font-family:'Jost',sans-serif;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;border:none;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-block}
+.btn-primary:hover{background:#E8C97A}
+.btn-outline{background:transparent;color:#F2EBE0;padding:.85rem 2.2rem;font-family:'Jost',sans-serif;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;border:1px solid rgba(242,235,224,.3);cursor:pointer;transition:all .3s;text-decoration:none;display:inline-block}
+.btn-outline:hover{border-color:#F2EBE0}
+.hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;opacity:0;animation:fadeUp .8s 1.2s forwards}
+.hero-scroll span{font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:#8A8070}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,#C6993F,transparent);animation:scrollLine 2s ease-in-out infinite}
+@keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+section{padding:7rem 4rem}
+.section-tag{font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;color:#C6993F;margin-bottom:1rem}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:300;line-height:1.1;color:#F2EBE0}
+.section-title em{font-style:italic;color:#C6993F}
+.gold-line{width:50px;height:1px;background:#C6993F;margin:1.5rem 0}
+#about{background:#111111;border-top:1px solid rgba(198,153,63,0.18);border-bottom:1px solid rgba(198,153,63,0.18);padding:5rem 4rem}
+.about-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.about-text p{font-size:1.05rem;line-height:1.9;color:#8A8070;margin-bottom:1.2rem}
+.about-text p strong{color:#F2EBE0;font-weight:400}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.stat-box{border:1px solid rgba(198,153,63,0.18);padding:2rem;text-align:center}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:3rem;color:#C6993F;font-weight:300;display:block}
+.stat-label{font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:#8A8070;margin-top:.3rem;display:block}
+#menu{background:#080808;max-width:1200px;margin:0 auto;padding:7rem 4rem}
+.menu-tabs{display:flex;gap:0;margin:3rem 0;border-bottom:1px solid rgba(198,153,63,0.18)}
+.tab-btn{background:none;border:none;color:#8A8070;font-family:'Jost',sans-serif;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;padding:.8rem 1.8rem;cursor:pointer;position:relative;transition:color .3s}
+.tab-btn::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;background:#C6993F;transform:scaleX(0);transition:transform .3s}
+.tab-btn.active{color:#C6993F}
+.tab-btn.active::after{transform:scaleX(1)}
+.menu-panel{display:none;grid-template-columns:1fr 1fr;gap:0}
+.menu-panel.active{display:grid}
+.menu-item{padding:1.6rem 0;border-bottom:1px solid rgba(198,153,63,0.18);display:flex;justify-content:space-between;align-items:start;gap:2rem;transition:all .3s}
+.menu-item:hover .item-name{color:#C6993F}
+.item-info{flex:1}
+.item-name{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;color:#F2EBE0;margin-bottom:.3rem;transition:color .3s}
+.item-desc{font-size:.8rem;color:#8A8070;line-height:1.6}
+.item-tag{display:inline-block;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;border:1px solid #C6993F;color:#C6993F;padding:.15rem .5rem;margin-top:.4rem}
+.item-price{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#C6993F;white-space:nowrap;padding-top:.2rem}
+.menu-col{padding:0 2rem}
+.menu-col:first-child{border-right:1px solid rgba(198,153,63,0.18);padding-left:0}
+.menu-col:last-child{padding-right:0}
+#gallery{background:#111111;padding:7rem 4rem;border-top:1px solid rgba(198,153,63,0.18)}
+.gallery-header{max-width:1200px;margin:0 auto 3rem}
+.gallery-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:200px 200px 200px;gap:12px}
+.gal-item{overflow:hidden;position:relative;cursor:pointer}
+.gal-bg{width:100%;height:100%;transition:transform .6s ease;display:flex;align-items:center;justify-content:center;font-size:3rem}
+.gal-item:hover .gal-bg{transform:scale(1.06)}
+.gal-label{position:absolute;bottom:1rem;left:1rem;z-index:2;font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(242,235,224,.6)}
+.g1{grid-column:1/6;grid-row:1/3}.g2{grid-column:6/9;grid-row:1/2}.g3{grid-column:9/13;grid-row:1/2}
+.g4{grid-column:6/9;grid-row:2/3}.g5{grid-column:9/13;grid-row:2/3}
+.g6{grid-column:1/5;grid-row:3/4}.g7{grid-column:5/9;grid-row:3/4}.g8{grid-column:9/13;grid-row:3/4}
+.g1 .gal-bg{background:#1a1006;font-size:5rem}
+.g2 .gal-bg{background:#1e1708}
+.g3 .gal-bg{background:#201508}
+.g4 .gal-bg{background:#1a1006}
+.g5 .gal-bg{background:#221608}
+.g6 .gal-bg,.g7 .gal-bg,.g8 .gal-bg{background:#1c1407}
+#reservations{background:#080808;padding:7rem 4rem;border-top:1px solid rgba(198,153,63,0.18)}
+.res-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1.4fr;gap:6rem;align-items:start}
+.res-info p{font-size:.9rem;line-height:1.9;color:#8A8070;margin-bottom:2rem}
+.res-detail{display:flex;align-items:start;gap:1rem;margin-bottom:1.4rem}
+.res-icon{width:36px;height:36px;border:1px solid rgba(198,153,63,0.18);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.res-detail-text strong{display:block;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:#C6993F;margin-bottom:.2rem;font-weight:400}
+.res-detail-text span{font-size:.88rem;color:#8A8070;line-height:1.6}
+.res-form{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.form-group{display:flex;flex-direction:column;gap:.5rem}
+.form-group.full{grid-column:1/-1}
+.form-group label{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:#C6993F}
+.form-group input,.form-group select,.form-group textarea{background:#161616;border:1px solid rgba(198,153,63,0.18);color:#F2EBE0;padding:.85rem 1rem;font-family:'Jost',sans-serif;font-size:.88rem;font-weight:300;outline:none;transition:border-color .3s;border-radius:0}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#C6993F}
+.form-group select option{background:#161616}
+.form-group textarea{resize:vertical;min-height:100px}
+.submit-btn{grid-column:1/-1;background:#C6993F;color:#080808;border:none;padding:1rem;font-family:'Jost',sans-serif;font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;cursor:pointer;transition:all .3s;margin-top:.5rem}
+.submit-btn:hover{background:#E8C97A}
+.form-note{grid-column:1/-1;font-size:.75rem;color:#8A8070;text-align:center}
+#contact{background:#111111;padding:7rem 4rem;border-top:1px solid rgba(198,153,63,0.18)}
+.contact-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:3rem}
+.contact-block{padding:2.5rem;border:1px solid rgba(198,153,63,0.18);transition:border-color .4s}
+.contact-block:hover{border-color:#C6993F}
+.contact-block-icon{font-size:1.4rem;margin-bottom:1.2rem;display:block}
+.contact-block h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:#F2EBE0;margin-bottom:.8rem}
+.contact-block p{font-size:.85rem;color:#8A8070;line-height:1.8}
+.contact-block a{color:#C6993F;text-decoration:none}
+.map-box{max-width:1100px;margin:3rem auto 0;height:220px;background:#161616;border:1px solid rgba(198,153,63,0.18);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.8rem}
+.map-box span{font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;color:#8A8070}
+footer{background:#080808;border-top:1px solid rgba(198,153,63,0.18);padding:3rem 4rem;display:flex;align-items:center;justify-content:space-between}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:#C6993F;letter-spacing:.1em}
+.footer-logo em{font-style:italic;color:#F2EBE0}
+.footer-links{display:flex;gap:2rem;list-style:none}
+.footer-links a{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:#8A8070;text-decoration:none;transition:color .3s}
+.footer-links a:hover{color:#C6993F}
+.footer-copy{font-size:.72rem;color:#8A8070;letter-spacing:.1em}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-32px);transition:opacity .7s ease,transform .7s ease}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(32px);transition:opacity .7s ease,transform .7s ease}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+@media(max-width:900px){
+  nav{padding:1.2rem 2rem}
+  nav.scrolled{padding:.9rem 2rem}
+  .nav-links,.nav-reserve{display:none}
+  section,#about,#menu,#gallery,#reservations,#contact{padding:5rem 1.5rem}
+  .about-inner,.res-inner{grid-template-columns:1fr;gap:3rem}
+  .about-stats{grid-template-columns:1fr 1fr}
+  .menu-panel.active{grid-template-columns:1fr}
+  .menu-col{padding:0;border:none!important}
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-auto-rows:160px}
+  .g1,.g2,.g3,.g4,.g5,.g6,.g7,.g8{grid-column:auto;grid-row:auto}
+  .contact-inner{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:1.5rem;text-align:center}
+  .res-form{grid-template-columns:1fr}
+}#chat-bubble{position:fixed;bottom:2rem;right:2rem;z-index:9999}
+#chat-toggle{width:60px;height:60px;border-radius:50%;background:#C6993F;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 4px 24px rgba(198,153,63,.4);transition:all .3s}
+#chat-toggle:hover{background:#E8C97A;transform:scale(1.08)}
+#chat-window{position:fixed;bottom:6rem;right:2rem;width:360px;height:500px;background:#111111;border:1px solid rgba(198,153,63,0.3);border-radius:16px;display:none;flex-direction:column;z-index:9999;box-shadow:0 20px 60px rgba(0,0,0,.6);overflow:hidden}
+#chat-window.open{display:flex}
+#chat-head{background:#0d0d0d;border-bottom:1px solid rgba(198,153,63,0.2);padding:1rem 1.2rem;display:flex;align-items:center;gap:12px}
+.avatar{width:38px;height:38px;border-radius:50%;background:#C6993F;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.bot-name{font-size:1rem;color:#F2EBE0;margin:0}
+.bot-status{font-size:.7rem;color:#C6993F}
+.close-btn{margin-left:auto;background:none;border:none;color:#8A8070;cursor:pointer;font-size:1.2rem}
+#chat-msgs{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.7rem}
+.cmsg{max-width:82%;padding:.65rem .9rem;border-radius:12px;font-size:.82rem;line-height:1.55}
+.cmsg.bot{background:#1a1a1a;color:#F2EBE0;align-self:flex-start;border:1px solid rgba(198,153,63,0.1)}
+.cmsg.user{background:#C6993F;color:#080808;align-self:flex-end}
+.cmsg.typing{color:#8A8070;font-style:italic;background:#1a1a1a}
+.chat-quick{display:flex;flex-wrap:wrap;gap:5px;padding:.5rem 1rem}
+.cq-btn{font-size:.72rem;padding:.3rem .8rem;border-radius:20px;border:1px solid rgba(198,153,63,0.3);background:transparent;color:#C6993F;cursor:pointer}
+.cq-btn:hover{background:#C6993F;color:#080808}
+#chat-input-row{padding:.75rem 1rem;border-top:1px solid rgba(198,153,63,0.15);display:flex;gap:.6rem}
+#chat-input{flex:1;background:#1a1a1a;border:1px solid rgba(198,153,63,0.2);color:#F2EBE0;padding:.55rem .9rem;border-radius:20px;outline:none;font-size:.82rem}
+#chat-input:focus{border-color:#C6993F}
+#chat-send{width:36px;height:36px;border-radius:50%;background:#C6993F;border:none;cursor:pointer;font-size:.9rem}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#hero" class="nav-logo">La <span>Sera</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-reserve" onclick="document.getElementById('reservations').scrollIntoView({behavior:'smooth'})">Reserve a Table</button>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <p class="hero-tag">Est. 1987 &nbsp;·&nbsp; Toronto, Canada</p>
+    <h1 class="hero-title">La<em>Sera</em></h1>
+    <p class="hero-sub">Authentic Italian · Fine Dining</p>
+    <div class="hero-divider"></div>
+    <div class="hero-btns">
+      <a href="#reservations" class="btn-primary">Reserve a Table</a>
+      <a href="#menu" class="btn-outline">View Menu</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-inner">
+    <div class="about-text reveal-left">
+      <p class="section-tag">Our Story</p>
+      <h2 class="section-title">A Taste of <em>Italia</em><br/>in Every Bite</h2>
+      <div class="gold-line"></div>
+      <p>Since 1987, <strong>La Sera</strong> has been Toronto's most beloved destination for authentic Italian cuisine. Born from the recipes of Nonna Rosa in Napoli, our kitchen has remained true to tradition.</p>
+      <p>Every evening at La Sera is an experience — candlelit tables, the aroma of fresh basil and truffle, and the warmth of Italian hospitality.</p>
+    </div>
+    <div class="about-stats reveal-right">
+      <div class="stat-box"><span class="stat-num">37</span><span class="stat-label">Years of Excellence</span></div>
+      <div class="stat-box"><span class="stat-num">48</span><span class="stat-label">Signature Dishes</span></div>
+      <div class="stat-box"><span class="stat-num">12</span><span class="stat-label">Italian Wines</span></div>
+      <div class="stat-box"><span class="stat-num">★ 4.9</span><span class="stat-label">Guest Rating</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="reveal">
+    <p class="section-tag">Curated with Passion</p>
+    <h2 class="section-title">Our <em>Menu</em></h2>
+    <div class="gold-line"></div>
+  </div>
+  <div class="menu-tabs reveal">
+    <button class="tab-btn active" onclick="showTab('antipasti',this)">Antipasti</button>
+    <button class="tab-btn" onclick="showTab('pasta',this)">Pasta</button>
+    <button class="tab-btn" onclick="showTab('pizza',this)">Pizza</button>
+    <button class="tab-btn" onclick="showTab('secondi',this)">Secondi</button>
+    <button class="tab-btn" onclick="showTab('dolci',this)">Dolci</button>
+  </div>
+  <div class="menu-panel active" id="tab-antipasti">
+    <div class="menu-col">
+      <div class="menu-item"><div class="item-info"><div class="item-name">Burrata Pugliese</div><div class="item-desc">Fresh burrata, heirloom tomatoes, aged balsamic, basil oil</div><div class="item-tag">Chef's Choice</div></div><div class="item-price">$18</div></div>
+      <div class="menu-item"><div class="item-info"><div class="item-name">Carpaccio di Manzo</div><div class="item-desc">Paper-thin beef tenderloin, truffle oil, Parmigiano Reggiano, capers</div></div><div class="item-price">$22</div></div>
+      <div class="menu-item"><div class="item-info"><div class="item-name">Bruschetta Classica</div><div class="item-desc">Grilled sourdough, San Marzano tomatoes, fresh garlic, sea salt</div></div><div class="item-price">$14</div></div>
+    </div>
+    <div class="menu-col">
+      <div class="menu-item"><div class="item-info"><div class="item-name">Calamari Fritti</div><div class="item-desc">Crispy Sicilian calamari, lemon aioli, marinara dipping sauce</div></div><div class="item-price">$18</div></div>
+      <div class="menu-item"><div class="item-info"><div class="item-name">Prosciutto e Melone</div><div class="item-desc">24-month Prosciutto di Parma, cantaloupe, wild rocket, honey drizzle</div></div><div class="item-price">$21</div></div>
+      <div class="menu-item"><div class="item-info"><div class="item-name">Zuppa di Giorno</div><div class="item-desc">Chef's daily soup, rustic bread, extra virgin olive oil</div></div><div class="item-price">$12</div></div>
+    </div>
+  </div>
+  <div class="menu-panel" id="tab-pasta">
+    <div class="menu-col">
+      <div class="menu-item"><div class="item-info"><div class="item-name">Spaghetti alla Carbonara</div><div class="item-desc">Guanciale, Pecorino Romano, egg yolk, black pepper</div><div class="item-tag">Signature</div></div><div class="item-price">$28</div></div>
+      <div class="menu-item"><div class="item-info"><div class="item-name">Tagliatelle al Ragù</div><div class="item-desc">Hand-rolled egg tagliatelle, 8-hour Bolognese, Parmigiano</div></div><div class="item-price">$32</div></div>
+      <div class="menu-item"><div class="item-info"><div class="item-name">Gnocchi al Tartufo</div><div class="item-desc">Hand-made potato gnocchi, black truffle cream, Parmigiano</div><div class="item-tag">Vegetarian</div></div><div class="item-price">$30</div></div>
+    </div>
+    <div class="menu-col">
+      <div class="menu-item"><div class="item-info"><div class="item-name">Pappardelle al Cinghiale</div><div class="item-desc">Wild boar ragù, fresh pappardelle, rosemary, red wine reduction</div><div class="item-tag">Chef's Choice</div></div><div class="item-price">$36</div></div>
+      <div class="menu-item"><div class="item-info"><div class="item-name">Linguine alle Vongole</div><div class="item-desc">Fresh clams, white wine, garlic, parsley, chilli, olive oil</div></div><div class="item-price">$34</div></div>
+      <div class="menu-item"><div class="item-info"><div class="item-name">Rigatoni all'Amatriciana</div><div class="item-desc">Guanciale, San Marzano tomatoes, Pecorino, chilli flakes</div></div><div class="item-price">$26</div></div>
+    </div>
+  </div>
+  <div class="menu-panel" id="tab-pizza">
+    <div class="menu-col">
+      <div class="menu-item"><div class="item-info"><div class="item-name">Margherita D.O.P.</div><div class="item-desc">San Marzano tomato, Fior di Latte, fresh basil, olive oil</div><div class="item-tag">Classic</div></div><div class="item-price">$22</div></div>
+      <div class="menu-item"><div class="item-info"><div class="item-name">Diavola</div><div class="item-desc">Spicy Calabrian salami, tomato, Fior di Latte, chilli oil</div></div><div class="item-price">$26</div></div>
+      <div class="menu-item"><div class="item-info"><div class="item-name">Tartufo Bianco</div><div class="item-desc">White truffle oil, Fior di Latte, mushrooms, Parmigiano Reggiano</div><div class="item-tag">Signature</div></div><div class="item-price">$34</div></div>
+    </div>
+    <div class="menu-col">
+      <div class="menu-item"><div class="item-info"><div class="item-name">Quattro Formaggi</div><div class="item-desc">Gorgonzola, Taleggio, Fior di Latte, Parmigiano, honey</div></div><div class="item-price">$28</div></div>
+      <div class="menu-item"><div class="item-info"><div class="item-name">Prosciutto e Funghi</div><div class="item-desc">Prosciutto cotto, porcini mushrooms, tomato, Fior di Latte</div></div><div class="item-price">$27</div></div>
+      <div class="menu-item"><div class="item-info"><div class="item-name">Marinara</div><div class="item-desc">San Marzano tomato, garlic, oregano, olive oil</div><div class="item-tag">Vegan</div></div><div class="item-price">$18</div></div>
+    </div>
+  </div>
+  <div class="menu-panel" id="tab-secondi">
+    <div class="menu-col">
+      <div class="menu-item"><div class="item-info"><div class="item-name">Branzino al Forno</div><div class="item-desc">Whole roasted sea bass, lemon, capers, olive oil, roasted vegetables</div></div><div class="item-price">$44</div></div>
+      <div class="menu-item"><div class="item-info"><div class="item-name">Ossobuco alla Milanese</div><div class="item-desc">Braised veal shank, gremolata, saffron risotto</div><div class="item-tag">Chef's Choice</div></div><div class="item-price">$52</div></div>
+    </div>
+    <div class="menu-col">
+      <div class="menu-item"><div class="item-info"><div class="item-name">Tagliata di Manzo</div><div class="item-desc">Sliced AAA ribeye, rocket, Parmigiano shavings, truffle oil</div></div><div class="item-price">$58</div></div>
+      <div class="menu-item"><div class="item-info"><div class="item-name">Pollo alla Parmigiana</div><div class="item-desc">Breaded chicken breast, San Marzano tomato, Fior di Latte, basil</div></div><div class="item-price">$36</div></div>
+    </div>
+  </div>
+  <div class="menu-panel" id="tab-dolci">
+    <div class="menu-col">
+      <div class="menu-item"><div class="item-info"><div class="item-name">Tiramisù della Casa</div><div class="item-desc">Savoiardi, mascarpone, espresso, cocoa — our recipe since 1987</div><div class="item-tag">Since 1987</div></div><div class="item-price">$14</div></div>
+      <div class="menu-item"><div class="item-info"><div class="item-name">Panna Cotta al Caramello</div><div class="item-desc">Silky vanilla panna cotta, salted caramel, toasted almonds</div></div><div class="item-price">$13</div></div>
+    </div>
+    <div class="menu-col">
+      <div class="menu-item"><div class="item-info"><div class="item-name">Cannolo Siciliano</div><div class="item-desc">Ricotta cream, candied orange, dark chocolate chips, pistachio</div></div><div class="item-price">$12</div></div>
+      <div class="menu-item"><div class="item-info"><div class="item-name">Gelato Artigianale</div><div class="item-desc">Three scoops — ask your server for today's flavours</div></div><div class="item-price">$11</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="gallery-header reveal">
+    <p class="section-tag">Atmosphere & Cuisine</p>
+    <h2 class="section-title">A Feast for <em>the Eyes</em></h2>
+    <div class="gold-line"></div>
+  </div>
+  <div class="gallery-grid reveal">
+    <div class="gal-item g1"><div class="gal-bg">🍝</div><span class="gal-label">Signature Pasta</span></div>
+    <div class="gal-item g2"><div class="gal-bg">🍕</div><span class="gal-label">Wood-fired Pizza</span></div>
+    <div class="gal-item g3"><div class="gal-bg">🍷</div><span class="gal-label">Wine Cellar</span></div>
+    <div class="gal-item g4"><div class="gal-bg">🥗</div><span class="gal-label">Fresh Ingredients</span></div>
+    <div class="gal-item g5"><div class="gal-bg">🍰</div><span class="gal-label">Dolci</span></div>
+    <div class="gal-item g6"><div class="gal-bg">🫒</div><span class="gal-label">Italian Olive Oil</span></div>
+    <div class="gal-item g7"><div class="gal-bg">🧀</div><span class="gal-label">Artisan Cheese</span></div>
+    <div class="gal-item g8"><div class="gal-bg">☕</div><span class="gal-label">Espresso Bar</span></div>
+  </div>
+</section>
+
+<section id="reservations">
+  <div class="res-inner">
+    <div class="reveal-left">
+      <p class="section-tag">Book Your Evening</p>
+      <h2 class="section-title">Reserve<br/>a <em>Table</em></h2>
+      <div class="gold-line"></div>
+      <p>Join us for an unforgettable evening of authentic Italian cuisine. Reservations are recommended, especially on weekends.</p>
+      <div class="res-detail"><div class="res-icon">🕐</div><div class="res-detail-text"><strong>Opening Hours</strong><span>Mon–Thu: 5pm – 10pm<br/>Fri–Sat: 5pm – 11pm<br/>Sunday: 4pm – 9pm</span></div></div>
+      <div class="res-detail"><div class="res-icon">📍</div><div class="res-detail-text"><strong>Location</strong><span>221 King Street West<br/>Toronto, ON M5H 1K4</span></div></div>
+      <div class="res-detail"><div class="res-icon">📞</div><div class="res-detail-text"><strong>Phone</strong><span>(416) 555-0192</span></div></div>
+    </div>
+    <div class="reveal-right">
+      <form class="res-form" onsubmit="handleRes(event)">
+        <div class="form-group"><label>First Name</label><input type="text" placeholder="Maria" required/></div>
+        <div class="form-group"><label>Last Name</label><input type="text" placeholder="Rossi" required/></div>
+        <div class="form-group"><label>Email</label><input type="email" placeholder="maria@email.com" required/></div>
+        <div class="form-group"><label>Phone</label><input type="tel" placeholder="(416) 555-0000"/></div>
+        <div class="form-group"><label>Date</label><input type="date" required/></div>
+        <div class="form-group"><label>Time</label><select required><option value="">Select time</option><option>5:00 PM</option><option>6:00 PM</option><option>7:00 PM</option><option>8:00 PM</option><option>9:00 PM</option></select></div>
+        <div class="form-group"><label>Guests</label><select required><option value="">Number of guests</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7+</option></select></div>
+        <div class="form-group"><label>Occasion</label><select><option value="">Optional</option><option>Anniversary</option><option>Birthday</option><option>Date Night</option><option>Business Dinner</option></select></div>
+        <div class="form-group full"><label>Special Requests</label><textarea placeholder="Dietary requirements, allergies, special setup..."></textarea></div>
+        <button type="submit" class="submit-btn" id="submitBtn">Confirm Reservation</button>
+        <p class="form-note" id="formNote">You'll receive a confirmation within 24 hours</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div style="max-width:1100px;margin:0 auto 3rem" class="reveal">
+    <p class="section-tag">Find Us</p>
+    <h2 class="section-title">Get in <em>Touch</em></h2>
+    <div class="gold-line"></div>
+  </div>
+  <div class="contact-inner reveal">
+    <div class="contact-block"><span class="contact-block-icon">📍</span><h3>Visit Us</h3><p>221 King Street West<br/>Toronto, ON M5H 1K4<br/>Parking available on site</p></div>
+    <div class="contact-block"><span class="contact-block-icon">📞</span><h3>Call or Email</h3><p><a href="tel:+14165550192">(416) 555-0192</a><br/><a href="mailto:info@lasera.ca">info@lasera.ca</a><br/>We respond within 2 hours</p></div>
+    <div class="contact-block"><span class="contact-block-icon">🕐</span><h3>Hours</h3><p>Mon–Thu: 5pm – 10pm<br/>Fri–Sat: 5pm – 11pm<br/>Sunday: 4pm – 9pm</p></div>
+  </div>
+  <div class="map-box reveal"><span>📍</span><span>221 King Street West, Toronto</span><span style="font-size:.65rem;color:#555">Replace with Google Maps embed</span></div>
+</section>
+
+<footer>
+  <div class="footer-logo">La <em>Sera</em></div>
+  <ul class="footer-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#reservations">Reservations</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <p class="footer-copy">© 2024 La Sera · All rights reserved</p>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60)
+})
+function showTab(id,btn){
+  document.querySelectorAll('.menu-panel').forEach(p=>p.classList.remove('active'))
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'))
+  document.getElementById('tab-'+id).classList.add('active')
+  btn.classList.add('active')
+}
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})
+},{threshold:0.1})
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>obs.observe(el))
+function handleRes(e){
+  e.preventDefault()
+  const btn=document.getElementById('submitBtn')
+  btn.textContent='Sending...'
+  setTimeout(()=>{
+    btn.textContent='✓ Reservation Confirmed!'
+    btn.style.background='#2d6a3f'
+    btn.style.color='#fff'
+    document.getElementById('formNote').textContent='Thank you! Confirmation sent to your email.'
+  },1500)
+}
+const d=document.querySelector('input[type="date"]')
+if(d)d.min=new Date().toISOString().split('T')[0]
+</script>
+<div id="chat-bubble">
+  <button id="chat-toggle" onclick="toggleChat()">🍽️</button>
+</div>
+
+<div id="chat-window">
+  <div id="chat-head">
+    <div class="avatar">🍽️</div>
+    <div>
+      <p class="bot-name">La Sera Assistant</p>
+      <p class="bot-status">● Online</p>
+    </div>
+    <button class="close-btn" onclick="toggleChat()">✕</button>
+  </div>
+  <div id="chat-msgs">
+    <div class="cmsg bot">Buonasera! 🌙 Welcome to La Sera. Ask me about our menu, hours, or to make a reservation!</div>
+  </div>
+  <div class="chat-quick">
+    <button class="cq-btn" onclick="quickAsk('What pizzas do you have?')">🍕 Pizza</button>
+    <button class="cq-btn" onclick="quickAsk('What are your hours?')">🕐 Hours</button>
+    <button class="cq-btn" onclick="quickAsk('I want to reserve a table')">📅 Reserve</button>
+    <button class="cq-btn" onclick="quickAsk('Where are you located?')">📍 Location</button>
+  </div>
+  <div id="chat-input-row">
+    <input id="chat-input" type="text" placeholder="Ask me anything..." onkeydown="if(event.key==='Enter')sendChat()"/>
+    <button id="chat-send" onclick="sendChat()">➤</button>
+  </div>
+</div>
+
+<script>
+const SYSTEM = `You are a warm assistant for La Sera, an authentic Italian restaurant in Toronto. You know the full menu, hours, and can take reservations. Opening hours: Mon-Thu 5pm-10pm, Fri-Sat 5pm-11pm, Sun 4pm-9pm. Address: 221 King Street West Toronto. Phone: (416) 555-0192. Menu highlights: Margherita Pizza $22, Carbonara $28, Tiramisu $14, Ossobuco $52. Be friendly and add Italian flair!`;
+
+let history = [];
+let open = false;
+
+function toggleChat(){
+  open = !open;
+  document.getElementById('chat-window').classList.toggle('open', open);
+  if(open) document.getElementById('chat-input').focus();
+}
+
+function quickAsk(q){
+  document.getElementById('chat-input').value = q;
+  sendChat();
+}
+
+async function sendChat(){
+  const input = document.getElementById('chat-input');
+  const msgs = document.getElementById('chat-msgs');
+  const text = input.value.trim();
+  if(!text) return;
+  msgs.innerHTML += '<div class="cmsg user">'+text+'</div>';
+  input.value = '';
+  history.push({role:'user',content:text});
+  msgs.scrollTop = msgs.scrollHeight;
+  const t = document.createElement('div');
+  t.className='cmsg bot typing';t.id='typing';t.textContent='Typing...';
+  msgs.appendChild(t);
+  try{
+    const res = await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:400,system:SYSTEM,messages:history})
+    });
+    const data = await res.json();
+    const reply = data.content?.[0]?.text || 'Please call us at (416) 555-0192';
+    document.getElementById('typing')?.remove();
+    msgs.innerHTML += '<div class="cmsg bot">'+reply+'</div>';
+    history.push({role:'assistant',content:reply});
+  }catch(e){
+    document.getElementById('typing')?.remove();
+    msgs.innerHTML += '<div class="cmsg bot">Sorry! Please call us at (416) 555-0192</div>';
+  }
+  msgs.scrollTop = msgs.scrollHeight;
+}
+</script>
+</body>
+</html>
